@@ -17,8 +17,13 @@
                         <td>{{ product.name }}</td>
                         <td>{{ product.price }}</td>
                         <td>
-                            <button (click)="handleCheckProduct(product)" class="btn btn-outline-success" title="Submit">
+                            <button (click)="handleCheckProduct(product)" class="btn btn-outline-success" >
                                 <i [class]="product.checked?'bi bi-check-circle' : 'bi bi-circle'"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button (click)="handleDeleteProduct(product)" class="btn btn-outline-danger" >
+                                <i class="bi bi-trash"></i>
                             </button>
                         </td>
                     </tr>

@@ -18,6 +18,11 @@ export class ProductsService {
     );
   }
   public deleteProduct(product: Product) {
-    return this.http.delete<any>(`http://localhost:8089/products/${product.id}`);
+    return this.http.delete<any>(
+      `http://localhost:8089/products/${product.id}`
+    );
+  }
+  public saveProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>('http://localhost:8089/products', product);
   }
 }

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
+import { Product } from 'model/product.model';
 
 @Component({
   selector: 'app-products',
@@ -8,6 +9,7 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
+  products : Array<Product> = [];
   constructor(private ps :ProductsService ){
   }
 
@@ -26,9 +28,8 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-  products : Array<any> = [];
 
-  handleCheckProduct(product: any){
+  handleCheckProduct(product: Product){
    this.ps.checkProduct(product).subscribe({
       next :updateProduct =>{
         product.checked = !product.checked;
@@ -37,5 +38,16 @@ export class ProductsComponent implements OnInit {
         console.log(error);
       }
     })
+  }
+  handleDeleteProduct(product :Product){
+    if(confirm("Are you sure you want to delete this product?"))
+    this.ps.deleteProduct(product).subscribe({
+      next:value=>{
+        this.products=this.products.filter((p)=>p.id !== product.id);
+      },
+      error:error=>{
+        console.log(error);
+      }
+  })
   }
 }

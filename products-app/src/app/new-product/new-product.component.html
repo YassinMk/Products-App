@@ -1,1 +1,49 @@
-
+<div class="p-3">
+  <div class="card">
+    <div class="card-header">
+      <h3>New Product</h3>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md">
+          <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+            <div class="mb-3">
+              <label class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                formControlName="name"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Price</label>
+              <input
+                type="number"
+                class="form-control"
+                id="price"
+                formControlName="price"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="checked">Checked</label>
+              <input
+                type="checkbox"
+                class="form-check-input ms-3"
+                id="checked"
+                formControlName="checked"
+              />
+            </div>
+            <button
+              [disabled]="productForm.invalid"
+              type="submit"
+              class="btn btn-info text-white w-25"
+            >
+              Save
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

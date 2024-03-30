@@ -11,6 +11,10 @@ import { Product } from 'model/product.model';
 export class NewProductComponent implements OnInit {
   public productForm!: FormGroup;
   constructor(private fb: FormBuilder, private ps: ProductsService) {}
+  
+  
+  
+  
   ngOnInit(): void {
     this.productForm = this.fb.group({
       name: this.fb.control('', [Validators.required]),

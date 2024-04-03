@@ -3,11 +3,20 @@
     <div class="card-header">
       <h3>Products</h3>
     </div>
+
     <div class="card-body">
-      <input type="text" class="input" [(ngModel)]="keyword" />
-      <button class="btn btn-primary ms-3 mt-0" (click)="searchProduct()">
-        <i class="bi bi-search"></i>
-      </button>
+      <div class="form-group">
+        <div class="d-flex">
+          <input type="text" class="form-control w-25" [(ngModel)]="keyword" />
+          <button
+            type="button"
+            class="btn btn-primary ms-3 mt-0"
+            (click)="getProducts()"
+          >
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </div>
 
       <table class="table">
         <thead>
@@ -41,9 +50,33 @@
                 <i class="bi bi-trash"></i>
               </button>
             </td>
+            <td>
+              <button
+                (click)="handleEditProduct(product)"
+                class="btn btn-outline-warning"
+              >
+                <i class="bi bi-pencil"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <nav aria-label="...">
+        <ul class="pagination pagination-md">
+          <li
+            class="page-item"
+            *ngFor="let page of [].constructor(this.totalPages); let i = index"
+          >
+            <button
+              class="page-link"
+              (click)="handleGotoPage(i + 1)"
+              [class.active]="currentPage == i + 1"
+            >
+              {{ i + 1 }}
+            </button>
+          </li>
+        </ul>
+      </nav>
     </div>
   </div>
 </div>

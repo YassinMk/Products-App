@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Product } from 'model/product.model';
 import { FormsModule } from '@angular/forms';
+import { ProductData } from 'model/productData.model';
 
 @Component({
   selector: 'app-products',
@@ -12,16 +13,41 @@ import { FormsModule } from '@angular/forms';
 export class ProductsComponent implements OnInit {
   public products: Array<Product> = [];
   public keyword: string = '';
+  totalProducts: number = 0;
+  totalPages: number = 0;
+  pageSize: number = 3;
+  currentPage: number = 1;
+
   constructor(private ps: ProductsService) {}
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getAllProducts();
+  }
+
+  getAllProducts() {
+    this.ps.getAllProducts().subscribe({
+      next: (products) => {
+        this.totalProducts = products.length;
+        this.getProducts();
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   getProducts() {
-    this.ps.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
+    this.ps.getProducts(this.keyword).subscribe({
+      next: (resp) => {
+        this.products = resp.body.filter((p: any) =>
+          p.name.includes(this.keyword)
+        );
+        this.totalPages = Math.floor(this.products.length / this.pageSize);
+
+        this.products = this.products.slice(
+          this.currentPage * this.pageSize - this.pageSize,
+          this.currentPage * this.pageSize
+        );
       },
       error: (error) => {
         console.log(error);
@@ -51,14 +77,10 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  searchProduct() {
-    this.ps.searchProducts(this.keyword).subscribe({
-      next: (products) => {
-        this.products = products;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
+  handleGotoPage(page: number) {
+    this.currentPage = page;
+    this.getProducts();
   }
+
+  handleEditProduct(product: Product) {}
 }

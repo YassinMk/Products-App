@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ProductsService } from '../services/products.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'model/product.model';
+import { AppStateService } from '../services/app-state.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,7 +17,8 @@ export class EditProductComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private ps: ProductsService,
-    private fm: FormBuilder
+    private fm: FormBuilder,
+    public appState: AppStateService
   ) {}
 
   ngOnInit() {
@@ -36,6 +38,7 @@ export class EditProductComponent implements OnInit {
     });
   }
   updateProduct() {
+    this.appState.setProductsState({ status: 'LOADING' });
     let product: Product = this.productFormGroup.value;
     this.ps.updateProduct(product).subscribe({
       next: (data) => {
@@ -43,6 +46,10 @@ export class EditProductComponent implements OnInit {
       },
       error: (error) => {
         console.log(error);
+        this.appState.setProductsState({
+          status: 'ERROR',
+          errorMessage: error,
+        });
       },
     });
   }

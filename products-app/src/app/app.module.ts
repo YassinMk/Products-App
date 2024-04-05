@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AppErrorComponent } from './app-error/app-error.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,9 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     NewProductComponent,
     HomeComponent,
     EditProductComponent,
+    DashbordComponent,
+    NavbarComponent,
+    AppErrorComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule,ReactiveFormsModule,FormsModule],
   providers: [],

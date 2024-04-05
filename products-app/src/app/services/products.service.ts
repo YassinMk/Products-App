@@ -7,31 +7,45 @@ import { Product } from 'model/product.model';
   providedIn: 'root',
 })
 export class ProductsService {
+  private host :string = 'http://localhost:8089/products';
+  
   constructor(private http: HttpClient) {}
 
   public checkProduct(product: Product): Observable<any> {
     return this.http.patch<Product>(
-      `http://localhost:8089/products/${product.id}`,
+      `${this.host}${product.id}`,
       { checked: !product.checked }
     );
   }
   public deleteProduct(product: Product) {
     return this.http.delete<any>(
-      `http://localhost:8089/products/${product.id}`
+      `${this.host}${product.id}`
     );
   }
   public saveProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>('http://localhost:8089/products', product);
+    return this.http.post<Product>(`${this.host}`, product);
   }
-  
-  public getProducts(keyword :string="")
-  {
+
+  public getProducts(keyword: string = '') {
     return this.http.get<any>(
-      `http://localhost:8089/products?name_like=${keyword}`,
+      `${this.host}${keyword}`,
       { observe: 'response' }
     );
   }
   public getAllProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8089/products');
+    return this.http.get<Product[]>(`${this.host}`);
+  }
+
+  getProductById(productId: number) {
+    return this.http.get<Product>(
+      `${this.host}${productId}`
+    );
+  }
+  updateProduct(product: Product):Observable<Product> {
+    return this.http.put<Product>(
+      `${this.host}{product.id}`,
+      product
+    );
+    
   }
 }

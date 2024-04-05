@@ -84,7 +84,8 @@ export class ProductsComponent implements OnInit {
   handleCheckProduct(product: Product) {
     this.ps.checkProduct(product).subscribe({
       next: (updateProduct) => {
-        product.checked = !product.checked;
+        product.checked=!product.checked;
+        console.log(product);
       },
       error: (error) => {
         console.log(error);

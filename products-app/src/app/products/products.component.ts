@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getAllProducts() {
-    this.appState.setProductsState({ status: 'LOADING' });
+    //this.appState.setProductsState({ status: 'LOADING' });
     this.ps.getAllProducts().subscribe({
       next: (products) => {
         let totalProducts = products.length;
@@ -45,7 +45,7 @@ export class ProductsComponent implements OnInit {
   }
 
   getProducts() {
-    this.appState.setProductsState({ status: 'LOADING' });
+    //this.appState.setProductsState({ status: 'LOADING' });
     this.ps.getProducts(this.appState.productsState.keyword).subscribe({
       next: (resp) => {
         let products = resp.body.filter((p: any) =>

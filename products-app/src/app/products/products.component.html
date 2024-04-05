@@ -7,7 +7,11 @@
     <div class="card-body">
       <div class="form-group">
         <div class="d-flex">
-          <input type="text" class="form-control w-25" [(ngModel)]="keyword" />
+          <input
+            type="text"
+            class="form-control w-25"
+            [(ngModel)]="appState.productsState.keyword"
+          />
           <button
             type="button"
             class="btn btn-primary ms-3 mt-0"
@@ -27,7 +31,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let product of appState.productsState.products">
             <td>{{ product.name }}</td>
             <td>{{ product.price }}</td>
             <td>
@@ -65,12 +69,12 @@
         <ul class="pagination pagination-md">
           <li
             class="page-item"
-            *ngFor="let page of [].constructor(this.totalPages); let i = index"
+            *ngFor="let page of [].constructor(this.appState.productsState.totalPages); let i = index"
           >
             <button
               class="page-link"
               (click)="handleGotoPage(i + 1)"
-              [class.active]="currentPage == i + 1"
+              [class.active]="this.appState.productsState.currentPage == i + 1"
             >
               {{ i + 1 }}
             </button>

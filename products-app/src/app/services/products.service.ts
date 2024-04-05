@@ -13,13 +13,13 @@ export class ProductsService {
 
   public checkProduct(product: Product): Observable<any> {
     return this.http.patch<Product>(
-      `${this.host}${product.id}`,
+      `${this.host}/${product.id}`,
       { checked: !product.checked }
     );
   }
   public deleteProduct(product: Product) {
     return this.http.delete<any>(
-      `${this.host}${product.id}`
+      `${this.host}/${product.id}`
     );
   }
   public saveProduct(product: Product): Observable<Product> {
@@ -38,12 +38,12 @@ export class ProductsService {
 
   getProductById(productId: number) {
     return this.http.get<Product>(
-      `${this.host}${productId}`
+      `${this.host}/${productId}`
     );
   }
   updateProduct(product: Product):Observable<Product> {
     return this.http.put<Product>(
-      `${this.host}{product.id}`,
+      `${this.host}/${product.id}`,
       product
     );
     

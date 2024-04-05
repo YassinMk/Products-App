@@ -4,6 +4,8 @@ import { ProductsService } from '../services/products.service';
 import { Product } from 'model/product.model';
 import { FormsModule } from '@angular/forms';
 import { ProductData } from 'model/productData.model';
+import { Router } from '@angular/router';
+import { AppStateService } from '../services/app-state.service';
 
 @Component({
   selector: 'app-products',
@@ -11,46 +13,70 @@ import { ProductData } from 'model/productData.model';
   styleUrls: ['./products.component.css'],
 })
 export class ProductsComponent implements OnInit {
-  public products: Array<Product> = [];
-  public keyword: string = '';
-  totalProducts: number = 0;
-  totalPages: number = 0;
-  pageSize: number = 3;
-  currentPage: number = 1;
-
-  constructor(private ps: ProductsService) {}
+  constructor(
+    private ps: ProductsService,
+    private router: Router,
+    public appState: AppStateService
+  ) {}
 
   ngOnInit(): void {
     this.getAllProducts();
   }
 
   getAllProducts() {
+    this.appState.setProductsState({ status: 'LOADING' });
     this.ps.getAllProducts().subscribe({
       next: (products) => {
-        this.totalProducts = products.length;
+        let totalProducts = products.length;
+        this.appState.setProductsState({ totalProducts: totalProducts });
         this.getProducts();
+        this.appState.setProductsState({
+          status: 'LOADED',
+        });
       },
       error: (error) => {
         console.log(error);
+        this.appState.setProductsState({
+          status: 'ERROR',
+          errorMessage: error,
+        });
       },
     });
   }
 
   getProducts() {
-    this.ps.getProducts(this.keyword).subscribe({
+    this.appState.setProductsState({ status: 'LOADING' });
+    this.ps.getProducts(this.appState.productsState.keyword).subscribe({
       next: (resp) => {
-        this.products = resp.body.filter((p: any) =>
-          p.name.includes(this.keyword)
+        let products = resp.body.filter((p: any) =>
+          p.name.includes(this.appState.productsState.keyword)
         );
-        this.totalPages = Math.floor(this.products.length / this.pageSize);
+        let totalPages = Math.floor(
+          products.length / this.appState.productsState.pageSize
+        );
 
-        this.products = this.products.slice(
-          this.currentPage * this.pageSize - this.pageSize,
-          this.currentPage * this.pageSize
-        );
+        let start =
+          (this.appState.productsState.currentPage - 1) *
+          this.appState.productsState.pageSize;
+        let end =
+          this.appState.productsState.currentPage *
+          this.appState.productsState.pageSize;
+
+        products = products.slice(start, end);
+        this.appState.setProductsState({
+          products: products,
+          totalPages: totalPages,
+
+        })
+        // Update the productsState using setProductsState
+        
       },
       error: (error) => {
         console.log(error);
+        this.appState.setProductsState({
+          status: 'ERROR',
+          errorMessage: error,
+        });
       },
     });
   }
@@ -69,7 +95,7 @@ export class ProductsComponent implements OnInit {
     if (confirm('Are you sure you want to delete this product?'))
       this.ps.deleteProduct(product).subscribe({
         next: (value) => {
-          this.products = this.products.filter((p) => p.id !== product.id);
+          this.getAllProducts();
         },
         error: (error) => {
           console.log(error);
@@ -78,9 +104,11 @@ export class ProductsComponent implements OnInit {
   }
 
   handleGotoPage(page: number) {
-    this.currentPage = page;
+    this.appState.productsState.currentPage = page;
     this.getProducts();
   }
 
-  handleEditProduct(product: Product) {}
+  handleEditProduct(product: Product) {
+    this.router.navigateByUrl(`/editProduct/${product.id}`);
+  }
 }

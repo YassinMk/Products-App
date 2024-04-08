@@ -14,10 +14,20 @@ export class AppStateService {
     status: 'LOADED',
     errorMessage: '',
   };
+  public authState : any = {
+    isAuhtenticated : false,
+    username : undefined,
+    roles : undefined,
+    token: undefined
+
+  }
 
   constructor() {}
   public setProductsState(state: any) {
     console.log(state);
     this.productsState = { ...this.productsState, ...state };
+  }
+  public setAuthState(state : any){
+    this.authState= {...this.authState, ...state};
   }
 }

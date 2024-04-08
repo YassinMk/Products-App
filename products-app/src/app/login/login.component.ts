@@ -1,6 +1,8 @@
 import { ParseSourceFile } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class LoginComponent implements OnInit {
 
   formLogin! : FormGroup;
-  constructor(private fb : FormBuilder){}
+  public errorMessage : undefined;
+  constructor(private fb : FormBuilder, private router : Router , private authentiService :AuthService ){}
   ngOnInit(): void {
     this.formLogin = this.fb.group({
       username : this.fb.control(""),
@@ -18,7 +21,16 @@ export class LoginComponent implements OnInit {
     })
   }
   handleLogin() {
-    console.log(this.formLogin)
+    console.log(this.formLogin.value);
+    let username = this.formLogin.value.username;
+    let password = this.formLogin.value.password;
+    this.authentiService.login(username,password)
+    .then(resp=>{
+      this.router.navigateByUrl("/admin");
+    }      
+    ).catch(err=>{
+      this.errorMessage=err;
+    })
   }
 
 }

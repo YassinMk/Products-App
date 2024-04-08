@@ -45,14 +45,15 @@
               </button>
             </td>
             <td>
-              <button
+              <button 
+                *ngIf="appState.authState.roles.includes('ADMIN')"
                 (click)="handleDeleteProduct(product)"
                 class="btn btn-outline-danger"
               >
                 <i class="bi bi-trash"></i>
               </button>
             </td>
-            <td>
+            <td *ngIf="appState.authState.roles.includes('ADMIN')">
               <button
                 (click)="handleEditProduct(product)"
                 class="btn btn-outline-warning"

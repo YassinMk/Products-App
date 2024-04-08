@@ -13,9 +13,10 @@ const routes: Routes = [
     { path: 'products', component: ProductsComponent },
     { path: 'newProduct', component: NewProductComponent },
     {path:'editProduct/:id',component:EditProductComponent},
+    { path: 'home', component: HomeComponent },
+
   ]},
-  { path: 'home', component: HomeComponent },
-  {path:"" , redirectTo: "login", pathMatch:"full"}
+  {path:"" , redirectTo: "/login", pathMatch:"full"}
 ];
 
 @NgModule({

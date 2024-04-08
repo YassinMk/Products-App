@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
     let password = this.formLogin.value.password;
     this.authentiService.login(username,password)
     .then(resp=>{
+      console.log(resp);
       this.router.navigateByUrl("/admin");
     }      
     ).catch(err=>{

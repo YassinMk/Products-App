@@ -14,6 +14,7 @@ export class AuthService {
     let user:any = await firstValueFrom(this.http.get("http://localhost:8089/users/"+username));
     if(password == atob(user.password)){
       let decodedJwt:any = jwtDecode(user.token);
+      console.log(decodedJwt);
         this.appState.setAuthState({
           isAuthenticated : true ,
           username : decodedJwt.sub,

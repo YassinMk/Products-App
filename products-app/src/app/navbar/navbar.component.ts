@@ -10,17 +10,15 @@ import { LoadingService } from '../services/loading.service';
 export class NavbarComponent {
   actions : Array<any> = [
     {title:"Home",route:"home" ,icon:"house"},
-    {title:"Products",route:"products", icon:"search"},
-    {title:"New Product",route:"newProduct", icon:"bag-plus"}
+    {title:"Products",route:"/admin/products", icon:"search"},
+    {title:"New Product",route:"/admin/newProduct", icon:"bag-plus"}
   ];
-  public isLoading : boolean = false;
+  //public isLoading : boolean = false;
   currentActions: any;
 
   constructor(public  appState: AppStateService , public ls: LoadingService) { }
   setCurrentAction(action: any){
-    
     this.currentActions = action;
-    
   }
   }
   

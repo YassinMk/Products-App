@@ -61,20 +61,13 @@ J'ai utilisé json-server pour simuler un serveur backend. Pour démarrer json-s
 
 ## Screen shorts de l'application
 -Athentification page : 
-<div align="center">
     ![img_2.png](img_2.png)
-</div>
 -Admine session : 
-<div align="center">
     ![img_3.png](img_3.png)
     ![img_4.png](img_4.png)
-</div>
 -User Session : 
-<div align="center">
     ![img_5.png](img_5.png)
     ![img_6.png](img_6.png)
-</div>
-
 ## Génération de code
 
 Exécutez `ng generate component component-name` pour générer un nouveau composant. Vous pouvez également utiliser `ng generate directive|pipe|service|class|guard|interface|enum|module`.

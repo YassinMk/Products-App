@@ -1,8 +1,6 @@
-## :clipboard: Requirements
 [![Angular CLI](https://img.shields.io/badge/Angular%20CLI-15.2.11-red)](https://github.com/angular/angular-cli)
-[![json-server](https://img.shields.io/badge/json--server-0.16.3-blue)](https://github.com/typicode/json-server)
+[![json-server](https://img.shields.io/badge/json--server-0.16.3-blue)](https://github.com/typicode/json-server) 
 ## ProductsApp
-
 Ce projet et un traveaux pratique sur les bases le freamwrok Angulare version 15, il s'agit de la création d'une application web qui permet de gérer les produits par l ajout et la suppression et la modification des produits avec json-server comme API.
 Le projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
 
@@ -30,6 +28,7 @@ Le projet a été généré avec [Angular CLI](https://github.com/angular/angula
 - home : pour afficher la page d'accueil
 
 ## Services
+![image](https://github.com/YassinMk/divInto-Angular/assets/122708120/5d0edee2-77d9-44de-a47b-4a46ad2f9869)
 
 Dans ce projet j'ai decouvert les services et les observables, j'ai créer  les services  suivants :
 - product.service : pour la gestion des produits (ajout, modification, suppression). 
@@ -38,6 +37,7 @@ Dans ce projet j'ai decouvert les services et les observables, j'ai créer  les 
 Pour créer un service, j'ai utilisé la commande `ng generate service service-name`.
 
 ## Guards
+![image](https://github.com/YassinMk/divInto-Angular/assets/122708120/593e72de-efdb-434d-9cdc-7483f09679f6)
 
 les Guards sont des services qui permettent de protéger les routes contre l'accès dans certaines conditions. Dans ce projet j'ai utilisé les Guards suivants :
 - Authentification.guards : pour protéger les routes contre l'accès des utilisateurs non authentifiés.
@@ -48,11 +48,8 @@ Pour créer un Guard, j'ai utilisé la commande `ng generate guard guard-name`.
 
 Dans cette application, j'ai utilisé la notion de JWT (JSON Web Token) pour l'authentification des utilisateurs. 
 Nous l'avons intégré dans notre base de données avec json-server, JSON Web Token (JWT) est un standard ouvert (RFC 7519) qui définit une manière compacte et sécurisée d'échanger des informations entre différentes parties sous forme d'objet JSON. Dans notre application, nous utilisons JWT pour gérer l'authentification des utilisateurs.
-Lorsqu'un utilisateur se connecte avec succès, notre serveur génère un JWT qui contient des informations sur l'utilisateur, telles que son identifiant et son rôle. Ce JWT est ensuite renvoyé au client et stocké localement. À chaque requête ultérieure, le client envoie ce JWT dans l'en-tête de la requête pour prouver son identité.
-Le serveur vérifie ensuite la validité du JWT en utilisant une clé secrète partagée. Si le JWT est valide, le serveur autorise l'accès à la ressource demandée. Sinon, il renvoie une erreur d'authentification.
-L'utilisation de JWT présente plusieurs avantages, notamment la possibilité de gérer l'authentification sans avoir besoin de stocker les informations d'authentification côté serveur. Cela permet de réduire la charge sur le serveur et d'améliorer les performances de l'application.
-Dans notre application, nous avons intégré JWT avec json-server, qui est un outil simple pour créer une API RESTful à partir d'un fichier JSON. Cela nous permet de simuler un serveur backend et de gérer l'authentification des utilisateurs en utilisant JWT.
-En résumé, l'utilisation de JWT dans notre application nous permet de sécuriser l'authentification des utilisateurs et de gérer l'accès aux ressources de manière efficace et sécurisée.
+
+Dans notre application, nous avons intégré JWT avec json-server, qui est un outil simple pour créer une API RESTful à partir d'un fichier JSON. Cela nous permet de simuler un serveur backend et de gérer l'authentification des utilisateurs en utilisant JWT.En résumé, l'utilisation de JWT dans notre application nous permet de sécuriser l'authentification des utilisateurs et de gérer l'accès aux ressources de manière efficace et sécurisée.
 Vous pouvez trouver les données de l'API dans le fichier `data/db.json`.
 
 
@@ -63,14 +60,15 @@ Exécutez `ng serve` pour un serveur de développement. Naviguez vers `http://lo
 J'ai utilisé json-server pour simuler un serveur backend. Pour démarrer json-server, exécutez `json-server --watch data/db.json`. L'API sera disponible à l'adresse `http://localhost:3000/`.
 
 ## Screen shorts de l'application
--Athentification page : 
+**Authentification page** : 
     ![img_2.png](img_2.png)
--Admine session : 
+**Admin session** : 
     ![img_3.png](img_3.png)
     ![img_4.png](img_4.png)
--User Session : 
+**User Session** : 
     ![img_5.png](img_5.png)
     ![img_6.png](img_6.png)
+
 ## Génération de code
 
 Exécutez `ng generate component component-name` pour générer un nouveau composant. Vous pouvez également utiliser `ng generate directive|pipe|service|class|guard|interface|enum|module`.

@@ -1,6 +1,6 @@
 [![Angular CLI](https://img.shields.io/badge/Angular%20CLI-15.2.11-red)](https://github.com/angular/angular-cli)
 [![json-server](https://img.shields.io/badge/json--server-0.16.3-blue)](https://github.com/typicode/json-server) 
-## ProductsApp
+## Products-App
 Ce projet et un traveaux pratique sur les bases le freamwrok Angulare version 15, il s'agit de la création d'une application web qui permet de gérer les produits par l ajout et la suppression et la modification des produits avec json-server comme API.
 Le projet a été généré avec [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
 
